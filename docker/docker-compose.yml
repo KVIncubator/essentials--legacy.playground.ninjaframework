@@ -1,0 +1,18 @@
+# Local
+version: '3'
+
+services:
+  db:
+    container_name: exfom_blog_db
+    build:
+      context: ./mysql
+    restart: always
+    ports:
+      - ${MYSQL_PORT}:3306
+    volumes:
+      - ${DB_DIR}:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
