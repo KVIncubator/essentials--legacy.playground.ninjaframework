@@ -39,7 +39,7 @@ import com.google.inject.Singleton;
 
 
 @Singleton
-public class ApplicationController {
+public class HomepageController {
 
     public Result index() {
 

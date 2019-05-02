@@ -21,15 +21,15 @@ package conf;
 import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
-import controllers.ApplicationController;
+import controllers.HomepageController;
 
 public class Routes implements ApplicationRoutes {
 
     @Override
     public void init(Router router) {  
         
-        router.GET().route("/").with(ApplicationController::index);
-        router.GET().route("/hello_world.json").with(ApplicationController::helloWorldJson);
+        router.GET().route("/").with(HomepageController::index);
+        router.GET().route("/hello_world.json").with(HomepageController::helloWorldJson);
         
  
         ///////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ public class Routes implements ApplicationRoutes {
         ///////////////////////////////////////////////////////////////////////
         // Index / Catchall shows index page
         ///////////////////////////////////////////////////////////////////////
-        //router.GET().route("/.*").with(ApplicationController::index);
+        //router.GET().route("/.*").with(HomepageController::index);
     }
 
 }
