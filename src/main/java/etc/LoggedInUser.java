@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
+package etc;
 
-package conf;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
+import ninja.params.WithArgumentExtractor;
 
-@Singleton
-public class Module extends AbstractModule {
-
-    protected void configure() {
-        bind(StartupActions.class);
-    }
-
-}
+@WithArgumentExtractor(LoggedInUserExtractor.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.PARAMETER})
+public @interface LoggedInUser {}

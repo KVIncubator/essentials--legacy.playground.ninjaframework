@@ -16,37 +16,33 @@
 
 package controllers;
 
+import com.google.common.collect.Maps;
+import com.google.inject.Inject;
+import dao.PostDao;
+import models.Post;
 import ninja.Result;
 import ninja.Results;
 
-import com.google.inject.Singleton;
+import java.util.List;
+import java.util.Map;
 
+public class ApplicationController {
 
-@Singleton
-public class HomepageController {
+    @Inject
+    PostDao postDao;
 
     public Result index() {
 
-        return Results.html();
+        Post frontPost = postDao.getFirstPostForFrontPage();
 
-    }
-    
-    public Result helloWorldJson() {
-        
-        SimplePojo simplePojo = new SimplePojo();
-        simplePojo.content = "Hello World! Hello Json!";
-        simplePojo.index = 1;
-        simplePojo.createdBy = "Dima Denisenko";
+        List<Post> olderPosts = postDao.getOlderPostsForFrontPage();
 
-        return Results.json().render(simplePojo);
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("frontPost", frontPost);
+        map.put("olderPosts", olderPosts);
 
-    }
-    
-    public static class SimplePojo {
-
-        public String content;
-        public Integer index;
-        public String createdBy;
+        return Results.html().render("frontPost", frontPost)
+                .render("olderPosts", olderPosts);
 
     }
 }

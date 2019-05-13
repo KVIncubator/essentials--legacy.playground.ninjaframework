@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
+package models;
 
-package conf;
+import javax.validation.constraints.Size;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
+public class PostDto {
 
-@Singleton
-public class Module extends AbstractModule {
-
-    protected void configure() {
-        bind(StartupActions.class);
-    }
+    @Size(min = 1)
+    public String title;
+    
+    @Size(min = 1)
+    public String content;
+    
+    public PostDto() {}
 
 }

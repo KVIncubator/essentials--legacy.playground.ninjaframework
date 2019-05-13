@@ -14,39 +14,25 @@
  * limitations under the License.
  */
 
-package controllers;
+package models;
 
-import ninja.Result;
-import ninja.Results;
+import javax.persistence.*;
 
-import com.google.inject.Singleton;
-
-
-@Singleton
-public class HomepageController {
-
-    public Result index() {
-
-        return Results.html();
-
-    }
+@Entity
+@Table(name="users")
+public class User {
     
-    public Result helloWorldJson() {
-        
-        SimplePojo simplePojo = new SimplePojo();
-        simplePojo.content = "Hello World! Hello Json!";
-        simplePojo.index = 1;
-        simplePojo.createdBy = "Dima Denisenko";
-
-        return Results.json().render(simplePojo);
-
-    }
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    public Long id;
+    public String email;
+    public String password;
     
-    public static class SimplePojo {
-
-        public String content;
-        public Integer index;
-        public String createdBy;
-
+    public User() {}
+    
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
+ 
 }

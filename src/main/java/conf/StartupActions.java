@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-
 package conf;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
+import com.google.inject.Inject;
+import ninja.lifecycle.Start;
+import ninja.utils.NinjaProperties;
 
-@Singleton
-public class Module extends AbstractModule {
+public class StartupActions {
 
-    protected void configure() {
-        bind(StartupActions.class);
+    private NinjaProperties ninjaProperties;
+
+    @Inject
+    public StartupActions(NinjaProperties ninjaProperties) {
+        this.ninjaProperties = ninjaProperties;
     }
-
 }

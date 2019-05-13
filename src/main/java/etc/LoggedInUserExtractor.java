@@ -14,39 +14,38 @@
  * limitations under the License.
  */
 
-package controllers;
+package etc;
 
-import ninja.Result;
-import ninja.Results;
-
-import com.google.inject.Singleton;
+import ninja.Context;
+import ninja.params.ArgumentExtractor;
 
 
-@Singleton
-public class HomepageController {
+public class LoggedInUserExtractor implements ArgumentExtractor<String> {
 
-    public Result index() {
-
-        return Results.html();
-
-    }
-    
-    public Result helloWorldJson() {
+    @Override
+    public String extract(Context context) {
         
-        SimplePojo simplePojo = new SimplePojo();
-        simplePojo.content = "Hello World! Hello Json!";
-        simplePojo.index = 1;
-        simplePojo.createdBy = "Dima Denisenko";
-
-        return Results.json().render(simplePojo);
-
+        // if we got no cookies we break:
+        if (context.getSession() != null) {
+            
+            String email = context.getSession().get("username");
+            
+            return email;
+            
+        }
+        
+        return null;
     }
-    
-    public static class SimplePojo {
 
-        public String content;
-        public Integer index;
-        public String createdBy;
-
+    @Override
+    public Class<String> getExtractedType() {
+        return String.class;
     }
+
+    @Override
+    public String getFieldName() {
+        return null;
+    }
+
+
 }

@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
+package models;
 
-package conf;
+import java.util.List;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
+import models.Post;
 
-@Singleton
-public class Module extends AbstractModule {
+public class PostsDto {
 
-    protected void configure() {
-        bind(StartupActions.class);
-    }
+    public List<Post> posts;
 
 }
