@@ -76,7 +76,7 @@ public class PostController {
 
         } else {
             
-            postDao.postPost(email, postDto);
+            postDao.createPost(email, postDto);
             
             context.getFlashScope().success("New post created.");
             

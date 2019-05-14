@@ -28,6 +28,9 @@ import ninja.Results;
 import ninja.SecureFilter;
 import ninja.params.PathParam;
 
+import javax.persistence.NoResultException;
+import java.util.Collections;
+
 public class ApiController {
 
     @Inject
@@ -50,21 +53,25 @@ public class ApiController {
     }
     
     public Result getPostJson(@PathParam("id") Long id) {
-    
-        Post post = postDao.getPost(id);
-        
-        return Results.json().render(post);
+
+        try {
+            Post post = postDao.getPost(id);
+            return Results.json().render(post);
+        }catch (NoResultException e) {
+            return Results.notFound().json().render(Collections.emptyMap());
+        }
+
     
     }
 
     @FilterWith(SecureFilter.class)
-    public Result postPostJson(@LoggedInUser String email,
+    public Result createPostJson(@LoggedInUser String email,
                                   PostDto postDto) {
 
-        boolean succeeded = postDao.postPost(email, postDto);
+        boolean succeeded = postDao.createPost(email, postDto);
 
         if (!succeeded) {
-            return Results.notFound();
+            return Results.notFound().json().render(Collections.emptyMap());
         } else {
             return Results.json();
         }
@@ -72,13 +79,13 @@ public class ApiController {
     }
 
     @FilterWith(SecureFilter.class)
-    public Result postPostXml(@LoggedInUser String email,
+    public Result createPostXml(@LoggedInUser String email,
                                  PostDto postDto) {
 
-        boolean succeeded = postDao.postPost(email, postDto);
+        boolean succeeded = postDao.createPost(email, postDto);
 
         if (!succeeded) {
-            return Results.notFound();
+            return Results.notFound().xml().render(Collections.emptyMap());
         } else {
             return Results.xml();
         }

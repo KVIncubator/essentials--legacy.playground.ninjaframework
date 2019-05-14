@@ -39,13 +39,15 @@ public class Post {
     @Column(length = 5000)
     public String content;
 
-    //@ElementCollection(fetch=FetchType.EAGER)
-    //public List<Long> authorIds;
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(name="blog_post_user_relations", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name = "user_id")
+    public List<Long> authorIds;
     
     public Post() {}
-    
+
     public Post(User author, String title, String content) {
-        // this.authorIds = Lists.newArrayList(author.id);
+        this.authorIds = Lists.newArrayList(author.id);
         this.title = title;
         this.content = content;
         this.createdAt = new Date();

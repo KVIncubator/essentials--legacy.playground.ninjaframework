@@ -16,3 +16,6 @@ CREATE TABLE `blog_post_user_relations` (
   CONSTRAINT `blog_post_user_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `blog_posts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `blog_post_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `blog_posts` (`title`, `content`, `created_at`) VALUES ('Hello to the blog example!', '<p>Hi and welcome to the demo of Ninja!</p>', NOW());
+INSERT INTO `blog_post_user_relations` (`post_id`, `user_id`) VALUES (1, 1);

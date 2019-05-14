@@ -94,7 +94,7 @@ public class PostDao {
      * Returns false if user cannot be found in database.
      */
     @Transactional
-    public boolean postPost(String email, PostDto postDto) {
+    public boolean createPost(String email, PostDto postDto) {
         
         EntityManager entityManager = entitiyManagerProvider.get();
         

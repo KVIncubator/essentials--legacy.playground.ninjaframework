@@ -17,18 +17,21 @@
 
 package conf;
 
+import com.google.inject.Inject;
 import controllers.*;
 import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import ninja.utils.NinjaProperties;
 
-import com.google.inject.Inject;
-
 public class Routes implements ApplicationRoutes {
 
-    @Inject
     NinjaProperties ninjaProperties;
+
+    @Inject
+    public Routes(NinjaProperties ninjaProperties) {
+        this.ninjaProperties = ninjaProperties;
+    }
 
     /**
      * Using a (almost) nice DSL we can configure the router.
@@ -60,18 +63,18 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/post/new").with(PostController::postNewPost);
 
         ///////////////////////////////////////////////////////////////////////
-        // Create new post
+        // Show post
         ///////////////////////////////////////////////////////////////////////
         router.GET().route("/post/{id}").with(PostController::postShow);
 
         ///////////////////////////////////////////////////////////////////////
         // Api for management of software
         ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/api/{email}/posts.json").with(ApiController::getPostsJson);
-        router.GET().route("/api/{email}/post/{id}.json").with(ApiController::getPostJson);
-        router.GET().route("/api/{email}/posts.xml").with(ApiController::getPostsXml);
-        router.POST().route("/api/{email}/post.json").with(ApiController::postPostJson);
-        router.POST().route("/api/{email}/post.xml").with(ApiController::postPostXml);
+        router.GET().route("/api/posts.json").with(ApiController::getPostsJson);
+        router.GET().route("/api/post/{id}.json").with(ApiController::getPostJson);
+        router.GET().route("/api/posts.xml").with(ApiController::getPostsXml);
+        router.POST().route("/api/post.json").with(ApiController::createPostJson);
+        router.POST().route("/api/post.xml").with(ApiController::createPostXml);
 
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)

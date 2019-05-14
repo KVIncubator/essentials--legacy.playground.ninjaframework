@@ -39,6 +39,7 @@ public class ApplicationController {
 
         Map<String, Object> map = Maps.newHashMap();
         map.put("frontPost", frontPost);
+        map.put("noRecordsFound", !olderPosts.isEmpty());
         map.put("olderPosts", olderPosts);
 
         return Results.html().render("frontPost", frontPost)

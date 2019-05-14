@@ -16,8 +16,9 @@
 
 <hr/>
 
-<#if olderPosts??>
-    
+<#if !noRecordsFound??>
+
+<#else>
     <#list olderPosts as post>
         <h3>
             <a href="/post/${post.id}">${post.title}</a>
