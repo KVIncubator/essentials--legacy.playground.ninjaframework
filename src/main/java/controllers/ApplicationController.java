@@ -28,8 +28,12 @@ import java.util.Map;
 
 public class ApplicationController {
 
-    @Inject
     PostDao postDao;
+
+    @Inject
+    public ApplicationController(PostDao postDao) {
+        this.postDao = postDao;
+    }
 
     public Result index() {
 

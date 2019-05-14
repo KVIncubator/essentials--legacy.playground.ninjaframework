@@ -30,10 +30,14 @@ import com.google.inject.Provider;
 
 
 public class UserDao {
-    
-    @Inject
+
     Provider<EntityManager> entityManagerProvider;
-    
+
+    @Inject
+    public UserDao(Provider<EntityManager> entityManagerProvider) {
+        this.entityManagerProvider = entityManagerProvider;
+    }
+
     @UnitOfWork
     public boolean isUserAndPasswordValid(String email, String password) {
         

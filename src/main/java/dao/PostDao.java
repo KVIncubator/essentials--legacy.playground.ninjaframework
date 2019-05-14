@@ -32,10 +32,14 @@ import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 public class PostDao {
-   
-    @Inject
+
     Provider<EntityManager> entitiyManagerProvider;
-    
+
+    @Inject
+    public PostDao(Provider<EntityManager> entitiyManagerProvider) {
+        this.entitiyManagerProvider = entitiyManagerProvider;
+    }
+
     @UnitOfWork
     public PostsDto getAllPosts() {
         

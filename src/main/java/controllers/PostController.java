@@ -30,8 +30,12 @@ import ninja.validation.Validation;
 @Singleton
 public class PostController {
     
-    @Inject
     PostDao postDao;
+
+    @Inject
+    public PostController(PostDao postDao) {
+        this.postDao = postDao;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Show post

@@ -33,8 +33,12 @@ import java.util.Collections;
 
 public class ApiController {
 
-    @Inject
     private PostDao postDao;
+
+    @Inject
+    public ApiController(PostDao postDao) {
+        this.postDao = postDao;
+    }
 
     public Result getPostsJson() {
 

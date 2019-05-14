@@ -27,11 +27,14 @@ import ninja.session.Session;
 
 @Singleton
 public class LoginLogoutController {
-    
-    @Inject
+
     private UserDao userDao;
-    
-    
+
+    @Inject
+    public LoginLogoutController(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Login
     ///////////////////////////////////////////////////////////////////////////
