@@ -15,7 +15,7 @@
  */
 
 
-package conf;
+package com.exfom.playground.blog.conf;
 
 import com.google.inject.Inject;
 import controllers.*;

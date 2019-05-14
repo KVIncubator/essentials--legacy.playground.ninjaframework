@@ -15,16 +15,16 @@
  */
 
 
-package conf;
+package com.exfom.playground.blog.conf;
 
-import java.util.List;
-import ninja.Filter;
+import com.google.inject.AbstractModule;
+import com.google.inject.Singleton;
 
-public class Filters implements ninja.application.ApplicationFilters {
+@Singleton
+public class Module extends AbstractModule {
 
-    @Override
-    public void addFilters(List<Class<? extends Filter>> filters) {
-        // Add your application - wide filters here
-        // filters.add(MyFilter.class);
+    protected void configure() {
+        bind(StartupActions.class);
     }
+
 }

@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package conf;
 
-import com.google.inject.Inject;
-import ninja.lifecycle.Start;
-import ninja.utils.NinjaProperties;
+package com.exfom.playground.blog.conf;
 
-public class StartupActions {
+import java.util.List;
+import ninja.Filter;
 
-    private NinjaProperties ninjaProperties;
+public class Filters implements ninja.application.ApplicationFilters {
 
-    @Inject
-    public StartupActions(NinjaProperties ninjaProperties) {
-        this.ninjaProperties = ninjaProperties;
+    @Override
+    public void addFilters(List<Class<? extends Filter>> filters) {
+        // Add your application - wide filters here
+        // filters.add(MyFilter.class);
     }
 }

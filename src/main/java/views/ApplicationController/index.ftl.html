@@ -16,16 +16,14 @@
 
 <hr/>
 
-<#if !noRecordsFound??>
-
-<#else>
+<#if olderPosts??>
     <#list olderPosts as post>
         <h3>
             <a href="/post/${post.id}">${post.title}</a>
         </h3>  
         <p>${post.createdAt?date}</p>
     </#list>
-    
+
 </#if>
 
 </@layout.myLayout>

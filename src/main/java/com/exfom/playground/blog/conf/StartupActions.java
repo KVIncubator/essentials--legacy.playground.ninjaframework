@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
+package com.exfom.playground.blog.conf;
 
-package conf;
+import com.google.inject.Inject;
+import ninja.utils.NinjaProperties;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
+public class StartupActions {
 
-@Singleton
-public class Module extends AbstractModule {
+    private NinjaProperties ninjaProperties;
 
-    protected void configure() {
-        bind(StartupActions.class);
+    @Inject
+    public StartupActions(NinjaProperties ninjaProperties) {
+        this.ninjaProperties = ninjaProperties;
     }
-
 }
