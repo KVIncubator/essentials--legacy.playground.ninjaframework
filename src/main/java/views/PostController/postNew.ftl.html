@@ -1,24 +1,17 @@
-<#import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout i18n("postNew.pageTitle")>
-
-
-<script defer type="text/javascript">
-	$(window).load(function() {
-		tinyMCE.init({
-			mode : "textareas"
-		});
-	});
-</script>
-
-
+<#import "../layout/defaultLayout.ftl.html" as layout> <@layout.DefaultLayout i18n("postNew.pageTitle")>
 <div class="container">
-
 	<h1>${i18n("postNew.newPost")}</h1>
 
 	<!-- Example row of columns -->
 	<div class="row">
 		<div class="col-lg-8">
-			<form action="/post/new" method="post" class="form-horizontal" role="form">
 
+            <ul>
+            <#list validation.violations as violation>
+                 <li>${i18n(violation)}</li>
+             </#list>
+            </ul>
+			<form action="/post/new" method="post" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="title" class="col-lg-2 control-label">${i18n("postNew.title")}</label>
                     <div class="col-lg-10">
@@ -43,4 +36,4 @@
 </div>
 
 
-</@layout.myLayout>
+</@layout.DefaultLayout>

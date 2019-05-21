@@ -20,10 +20,10 @@ import javax.validation.constraints.Size;
 
 public class PostDto {
 
-    @Size(min = 1)
+    @Size(min = 3)
     public String title;
     
-    @Size(min = 1)
+    @Size(min = 3)
     public String content;
     
     public PostDto() {}

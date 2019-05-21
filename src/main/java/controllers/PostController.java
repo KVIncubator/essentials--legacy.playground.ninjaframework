@@ -65,10 +65,11 @@ public class PostController {
     }
 
     @FilterWith(SecureFilter.class)
-    public Result postNewPost(@LoggedInUser String email,
-                                 Context context,
-                                 @JSR303Validation PostDto postDto,
-                                 Validation validation) {
+    public Result postNewPost(
+            @LoggedInUser String email,
+            Context context,
+            @JSR303Validation PostDto postDto,
+            Validation validation) {
 
         if (validation.hasViolations()) {
 
@@ -76,11 +77,12 @@ public class PostController {
             context.getFlashScope().put("title", postDto.title);
             context.getFlashScope().put("content", postDto.content);
 
-            return Results.redirect("/post/new");
+            return Results.html().template("/views/PostController/postNew.ftl.html");
+            //return Results.redirect("/post/new");
 
         } else {
-            
-            postDao.createPost(email, postDto);
+
+            //postDao.createPost(email, postDto);
             
             context.getFlashScope().success("New post created.");
             

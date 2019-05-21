@@ -1,10 +1,6 @@
 <#import "../layout/defaultLayout.ftl.html" as layout> 
-<@layout.myLayout "Home page">    
-
-
-        
+<@layout.DefaultLayout "Home page">
 <#if frontPost??>
-
     <div class="jumbotron">
         <h1>
             <a href="/post/${frontPost.id}">${frontPost.title}</a>
@@ -26,4 +22,4 @@
 
 </#if>
 
-</@layout.myLayout>
+</@layout.DefaultLayout>
