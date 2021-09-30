@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2019 the original author or authors.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,48 +17,47 @@
 package controllers;
 
 
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
 
 import ninja.NinjaDocTester;
 import org.doctester.testbrowser.Request;
 import org.doctester.testbrowser.Response;
 import org.hamcrest.CoreMatchers;
-
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+import org.junit.Test;
 
 public class HomepageControllerDocTesterTest extends NinjaDocTester {
 
-    String URL_INDEX = "/";
-    String URL_HELLO_WORLD_JSON = "/hello_world.json";
+  String URL_INDEX = "/";
+  String URL_HELLO_WORLD_JSON = "/hello_world.json";
 
-    @Test
-    public void testGetIndex() {
+  @Test
+  public void testGetIndex() {
 
-        Response response = makeRequest(
-                Request.GET().url(
-                        testServerUrl().path(URL_INDEX)));
+    Response response = makeRequest(
+        Request.GET().url(
+            testServerUrl().path(URL_INDEX)));
 
-        assertThat(response.payload, containsString("Hello World!"));
-        assertThat(response.payload, containsString("Home"));
-
-
-    }
-
-    @Test
-    public void testGetHelloWorldJson() {
-
-        Response response = makeRequest(
-                Request.GET().url(
-                        testServerUrl().path(URL_HELLO_WORLD_JSON)));
-
-        HomepageController.SimplePojo simplePojo
-                = response.payloadJsonAs(HomepageController.SimplePojo.class);
-
-        assertThat(simplePojo.content, CoreMatchers.equalTo("Hello World! Hello Json!"));
+    assertThat(response.payload, containsString("Hello World!"));
+    assertThat(response.payload, containsString("Home"));
 
 
-    }
+  }
+
+  @Test
+  public void testGetHelloWorldJson() {
+
+    Response response = makeRequest(
+        Request.GET().url(
+            testServerUrl().path(URL_HELLO_WORLD_JSON)));
+
+    HomepageController.SimplePojo simplePojo
+        = response.payloadJsonAs(HomepageController.SimplePojo.class);
+
+    assertThat(simplePojo.content, CoreMatchers.equalTo("Hello World! Hello Json!"));
+
+
+  }
 
 
 }

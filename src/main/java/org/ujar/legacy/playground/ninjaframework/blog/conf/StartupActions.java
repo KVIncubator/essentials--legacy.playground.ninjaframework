@@ -1,12 +1,12 @@
-/**
+/*
  * Copyright (C) 2019 the original author or authors.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
+package org.ujar.legacy.playground.ninjaframework.blog.conf;
 
-package com.exfom.playground.blog.conf;
+import com.google.inject.Inject;
+import ninja.utils.NinjaProperties;
 
-import java.util.List;
-import ninja.Filter;
+public class StartupActions {
 
-public class Filters implements ninja.application.ApplicationFilters {
+  private NinjaProperties ninjaProperties;
 
-    @Override
-    public void addFilters(List<Class<? extends Filter>> filters) {
-        // Add your application - wide filters here
-        // filters.add(MyFilter.class);
-    }
+  @Inject
+  public StartupActions(NinjaProperties ninjaProperties) {
+    this.ninjaProperties = ninjaProperties;
+  }
 }

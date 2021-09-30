@@ -1,12 +1,12 @@
-/**
+/*
  * Copyright (C) 2019 the original author or authors.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,74 +22,78 @@ import dao.PostDao;
 import etc.LoggedInUser;
 import models.Post;
 import models.PostDto;
-import ninja.*;
+import ninja.Context;
+import ninja.FilterWith;
+import ninja.Result;
+import ninja.Results;
+import ninja.SecureFilter;
 import ninja.params.PathParam;
 import ninja.validation.JSR303Validation;
 import ninja.validation.Validation;
 
 @Singleton
 public class PostController {
-    
-    PostDao postDao;
 
-    @Inject
-    public PostController(PostDao postDao) {
-        this.postDao = postDao;
-    }
+  PostDao postDao;
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Show post
-    ///////////////////////////////////////////////////////////////////////////
-    public Result postShow(@PathParam("id") Long id) {
+  @Inject
+  public PostController(PostDao postDao) {
+    this.postDao = postDao;
+  }
 
-        Post post = null;
+  ///////////////////////////////////////////////////////////////////////////
+  // Show post
+  ///////////////////////////////////////////////////////////////////////////
+  public Result postShow(@PathParam("id") Long id) {
 
-        if (id != null) {
+    Post post = null;
 
-            post = postDao.getPost(id);
+    if (id != null) {
 
-        }
-
-        return Results.html().render("post", post);
-
-    }
-    
-    ///////////////////////////////////////////////////////////////////////////
-    // Create new post
-    ///////////////////////////////////////////////////////////////////////////
-    @FilterWith(SecureFilter.class)
-    public Result postNew() {
-
-        return Results.html();
+      post = postDao.getPost(id);
 
     }
 
-    @FilterWith(SecureFilter.class)
-    public Result postNewPost(
-            @LoggedInUser String email,
-            Context context,
-            @JSR303Validation PostDto postDto,
-            Validation validation) {
+    return Results.html().render("post", post);
 
-        if (validation.hasViolations()) {
+  }
 
-            context.getFlashScope().error("Please correct field.");
-            context.getFlashScope().put("title", postDto.title);
-            context.getFlashScope().put("content", postDto.content);
+  ///////////////////////////////////////////////////////////////////////////
+  // Create new post
+  ///////////////////////////////////////////////////////////////////////////
+  @FilterWith(SecureFilter.class)
+  public Result postNew() {
 
-            return Results.html().template("/views/PostController/postNew.ftl.html");
-            //return Results.redirect("/post/new");
+    return Results.html();
 
-        } else {
+  }
 
-            //postDao.createPost(email, postDto);
-            
-            context.getFlashScope().success("New post created.");
-            
-            return Results.redirect("/list");
+  @FilterWith(SecureFilter.class)
+  public Result postNewPost(
+      @LoggedInUser String email,
+      Context context,
+      @JSR303Validation PostDto postDto,
+      Validation validation) {
 
-        }
+    if (validation.hasViolations()) {
+
+      context.getFlashScope().error("Please correct field.");
+      context.getFlashScope().put("title", postDto.title);
+      context.getFlashScope().put("content", postDto.content);
+
+      return Results.html().template("/views/PostController/postNew.ftl.html");
+      //return Results.redirect("/post/new");
+
+    } else {
+
+      //postDao.createPost(email, postDto);
+
+      context.getFlashScope().success("New post created.");
+
+      return Results.redirect("/list");
 
     }
+
+  }
 
 }

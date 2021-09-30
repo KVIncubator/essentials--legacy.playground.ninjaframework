@@ -4,7 +4,7 @@
     <div class="jumbotron">
         <h1>
             <a href="/post/${frontPost.id}">${frontPost.title}</a>
-        </h1>  
+        </h1>
         <p>${frontPost.createdAt?date}</p>
         <p><#noescape>${frontPost.content}</#noescape></p>
     </div>
@@ -16,7 +16,7 @@
     <#list olderPosts as post>
         <h3>
             <a href="/post/${post.id}">${post.title}</a>
-        </h3>  
+        </h3>
         <p>${post.createdAt?date}</p>
     </#list>
 
