@@ -1,6 +1,6 @@
 # Blog Application
 
-Sample blog application built on top of Ninja, the full-featured Java web framework.
+Blog application built on top of Ninja, the full-featured Java web framework.
 
 ## Installation
 
