@@ -1,5 +1,7 @@
 # Blog Application
 
+[![Build](https://github.com/ujar-org/essentials--legacy.playground.ninjaframework/actions/workflows/build.yml/badge.svg)](https://github.com/ujar-org/essentials--legacy.playground.ninjaframework/actions/workflows/build.yml)
+
 Blog application built on top of [Ninja](https://www.ninjaframework.org/), the full-featured Java web framework.
 
 ## Installation
